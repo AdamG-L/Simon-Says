@@ -72,8 +72,8 @@ function updateLevel() {
 //Adds one of four buttons to an array and displays it on screen with sound/visual
 function displayRandomButton() {
   var randButton = Math.floor(Math.random() * 4 + 1);
-  buttonPattern.push(1);
-  selectButton(1);
+  buttonPattern.push(randButton);
+  selectButton(randButton);
 }
 
 //Selects the given button from 1-4.
