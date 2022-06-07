@@ -107,7 +107,7 @@ function toggleButton(button) {
   $(button).toggleClass("pressed");
   setTimeout(function() {
     $(button).toggleClass("pressed");
-  }, 5000);
+  }, 500);
 }
 
 //Displays game over screen and resets gameStarted
