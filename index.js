@@ -7,8 +7,8 @@ var index = 0; //Store the guess location
 $(document).keypress(function() {
   if (!gameStarted) {
     updateLevel();
-    gameStarted = true;
     displayRandomButton();
+    gameStarted = true;         //Start state must be after random button has been generated
   }
 });
 
@@ -16,6 +16,7 @@ $(document).keypress(function() {
 //Logic for when the buttons are clicked and the game has game has started
 $(".btn").click(function(e) {
   if (gameStarted) {
+    console.log("Index value+ " + index + "Current array value: " + buttonPattern[index] + " Current array length: " + buttonPattern.length);
     if ($(e.target).hasClass("green")) {
       if (buttonPattern[index] == 1) {
         selectButton(1);
@@ -51,10 +52,12 @@ $(".btn").click(function(e) {
     }
     //If pattern has been completed add one and rest pattern starting point on a short delay
     if (index >= buttonPattern.length) {
+      gameStarted = false;
       setTimeout(function() {
         updateLevel();
         displayRandomButton();
         index = 0;
+        gameStarted = true;           //Start state must be after random button has been generated
       }, 1000);
     }
   }
@@ -69,8 +72,8 @@ function updateLevel() {
 //Adds one of four buttons to an array and displays it on screen with sound/visual
 function displayRandomButton() {
   var randButton = Math.floor(Math.random() * 4 + 1);
-  buttonPattern.push(randButton);
-  selectButton(randButton);
+  buttonPattern.push(1);
+  selectButton(1);
 }
 
 //Selects the given button from 1-4.
@@ -104,7 +107,7 @@ function toggleButton(button) {
   $(button).toggleClass("pressed");
   setTimeout(function() {
     $(button).toggleClass("pressed");
-  }, 500);
+  }, 5000);
 }
 
 //Displays game over screen and resets gameStarted
@@ -122,5 +125,5 @@ function gameOver() {
   level = 0;
   gameStarted = false;
   buttonPattern = [];
-  var index = 0;
+  index = 0;
 }
